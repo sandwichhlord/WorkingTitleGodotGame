@@ -1,0 +1,22 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+*.translation
+
+# C++ Build artifacts and binaries
+build/
+bin/*.dll
+bin/*.so
+bin/*.dylib
+bin/*.obj
+bin/*.o
+.sconsign.dblite
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sln
