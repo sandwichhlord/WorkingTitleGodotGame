@@ -2,12 +2,28 @@
 
 [ext_resource type="Script" uid="uid://drrswf1drir4k" path="res://entities/player/player.gd" id="1_symyc"]
 [ext_resource type="Script" uid="uid://bu4ynbabltdlj" path="res://core/state_machine/fsm.gd" id="2_abrql"]
+[ext_resource type="Script" uid="uid://duuc88by4xbb3" path="res://core/states/player/idle.gd" id="3_bls4j"]
+[ext_resource type="Script" uid="uid://si0pfn7ylw81" path="res://core/states/player/run.gd" id="4_fkugw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bls4j"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1225824840]
 script = ExtResource("1_symyc")
 
-[node name="fsm" type="Node" parent="." unique_id=1966437112]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2054789738]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=86942051]
+shape = SubResource("RectangleShape2D_bls4j")
+
+[node name="fsm" type="Node" parent="." unique_id=1966437112 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_abrql")
+initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bu4ynbabltdlj"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2054789738]
+[node name="Idle" type="Node" parent="fsm" unique_id=491500609]
+script = ExtResource("3_bls4j")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"
+
+[node name="Run" type="Node" parent="fsm" unique_id=1454273869]
+script = ExtResource("4_fkugw")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"

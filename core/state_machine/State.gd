@@ -4,7 +4,7 @@ extends Node
 # Explicit type definitions so your code autocomplete works perfectly
 
 var fsm: Node
-
+@export var player: Player 
 # Virtual lifecycle methods to be overridden by child states
 func enter() -> void: pass
 func exit() -> void: pass
