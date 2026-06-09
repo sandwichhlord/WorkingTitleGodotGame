@@ -10,4 +10,3 @@ Basic Rules:-
 6. dont make changes in anyone elses code ofc
 7. make sure everything is working great before committing
 8. Never make change to any scenes (.tscn file) without first making sure no one else is working on it
-
