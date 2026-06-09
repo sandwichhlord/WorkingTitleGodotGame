@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 # Movement Variables
-@export var speed: float = 300.0
+@export var max_speed: float = 300.0
 @export var acceleration: float = 1500.0
 @export var friction: float = 1200.0
 var facing_direction: int = 1
