@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://b5jeb55ado3ye"]
 
 [ext_resource type="Script" uid="uid://drrswf1drir4k" path="res://entities/player/player.gd" id="1_symyc"]
+[ext_resource type="Script" uid="uid://bu4ynbabltdlj" path="res://core/state_machine/fsm.gd" id="2_abrql"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1225824840]
 script = ExtResource("1_symyc")
+
+[node name="fsm" type="Node" parent="." unique_id=1966437112]
+script = ExtResource("2_abrql")
+metadata/_custom_type_script = "uid://bu4ynbabltdlj"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2054789738]
