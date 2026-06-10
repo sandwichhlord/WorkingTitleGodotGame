@@ -18,8 +18,9 @@ func update(delta: float):
 	
 	if entity.is_on_floor():
 		if jump_buffer_timer > 0.0:
-			fsm.change_state("Jump")
+			entity.current_jumps = entity.max_jumps
 			jump_buffer_timer = 0
+			fsm.change_state("Jump")
 		else:
 			if direction != 0:
 				fsm.change_state("Run")
