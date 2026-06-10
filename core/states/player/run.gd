@@ -11,4 +11,3 @@ func update(delta: float):
 		owner.velocity.x = move_toward(owner.velocity.x, direction * owner.max_speed, owner.acceleration * delta)
 	else:
 		fsm.change_state("Idle")
-	
