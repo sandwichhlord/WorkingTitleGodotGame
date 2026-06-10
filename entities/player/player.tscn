@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://drrswf1drir4k" path="res://entities/player/player.gd" id="1_symyc"]
 
-[node name="Player" type="CharacterBody2D" unique_id=1225824840]
+[node name="Player" type="CharacterBody2D" unique_id=1225824840 groups=["Mainplayer"]]
 script = ExtResource("1_symyc")
