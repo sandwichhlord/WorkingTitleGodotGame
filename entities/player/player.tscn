@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://duuc88by4xbb3" path="res://core/states/player/idle.gd" id="3_bls4j"]
 [ext_resource type="Script" uid="uid://si0pfn7ylw81" path="res://core/states/player/run.gd" id="4_fkugw"]
 [ext_resource type="Script" uid="uid://7qa1qtsdm2mg" path="res://core/states/player/fall.gd" id="6_8fjmc"]
-[ext_resource type="Script" uid="uid://d4mkuy7615orh" path="res://entities/player/jump.gd" id="7_qiwj3"]
+[ext_resource type="Script" uid="uid://d4mkuy7615orh" path="res://core/states/player/jump.gd" id="7_qiwj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bls4j"]
 
