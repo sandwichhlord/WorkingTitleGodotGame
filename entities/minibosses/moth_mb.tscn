@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://du50w4d4ar72v"]
+
+[ext_resource type="Script" uid="uid://d2xi2s0hp6ek2" path="res://entities/minibosses/miniboss.gd" id="1_1s2iw"]
+[ext_resource type="Script" uid="uid://bu4ynbabltdlj" path="res://core/state_machine/fsm.gd" id="2_2e8th"]
+[ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="2_a1lbl"]
+[ext_resource type="Script" uid="uid://cb7m6kpc5s0ot" path="res://core/states/minibosses/handler.gd" id="3_2e8th"]
+[ext_resource type="Script" uid="uid://x1ungeiot3d8" path="res://core/states/minibosses/move.gd" id="3_a1lbl"]
+[ext_resource type="Script" uid="uid://cnox8tqi4b5dj" path="res://core/components/HealthComponent.gd" id="3_p6pml"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a1lbl"]
+
+[node name="MothMB" type="CharacterBody2D" unique_id=1584721735]
+script = ExtResource("1_1s2iw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2102078460]
+position = Vector2(996, 128)
+texture = ExtResource("2_a1lbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=106949934]
+position = Vector2(996, 128)
+scale = Vector2(8, 8)
+shape = SubResource("CircleShape2D_a1lbl")
+
+[node name="fsm" type="Node" parent="." unique_id=1657466171 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_2e8th")
+initial_state = NodePath("move")
+
+[node name="move" type="Node" parent="fsm" unique_id=2038709081]
+script = ExtResource("3_a1lbl")
+
+[node name="venom" type="Node" parent="fsm" unique_id=707835643]
+
+[node name="suction" type="Node" parent="fsm" unique_id=247830227]
+
+[node name="handler" type="Node" parent="fsm" unique_id=1404257247]
+script = ExtResource("3_2e8th")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1725571769]
+script = ExtResource("3_p6pml")
