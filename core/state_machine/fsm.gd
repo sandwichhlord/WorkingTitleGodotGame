@@ -11,10 +11,15 @@ var current_state: State
 func _ready() -> void:
 	await get_parent().ready
 	
+	# we gotta assign the body/entity that this fsm
+	# and its states belong to
+	var body = self.get_parent()
 	for child in get_children():
 		if child is State:
 			child.fsm = self            
 			
+			# assigning the entity to the child 
+			child.entity = body
 	current_state = initial_state
 	current_state.enter()
 
