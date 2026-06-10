@@ -11,3 +11,6 @@ func update(delta: float):
 		entity.velocity.x = move_toward(entity.velocity.x, direction * entity.max_speed, entity.acceleration * delta)
 	else:
 		fsm.change_state("Idle")
+		
+	if Input.is_action_just_pressed("jump"):
+		fsm.change_state("Jump")

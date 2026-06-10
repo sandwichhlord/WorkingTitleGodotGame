@@ -9,3 +9,5 @@ func update(delta: float):
 	
 	if Input.get_axis("move_left", "move_right") != 0:
 		fsm.change_state("Run")
+	if Input.is_action_just_pressed("jump"):
+		fsm.change_state("Jump")

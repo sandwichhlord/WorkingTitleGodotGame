@@ -1,19 +1,15 @@
 extends State
 
 func enter():
-	# If we have max jumps while falling, it means we walked off a ledge.
-	if entity.current_jumps == entity.max_jumps:
-		entity.current_jumps -= 1
-
+	entity.velocity.y = entity.jump_velocity
+	entity.current_jumps -= 1
+	
 func update(delta: float):
 	
 	var direction = Input.get_axis("move_left","move_right")
 	
-	if entity.is_on_floor():
-		if direction != 0:
-			fsm.change_state("Run")
-		else:
-			fsm.change_state("Idle")
+	if entity.velocity.y >= 0:
+		fsm.change_state("Fall")
 		return
 	
 	if direction != 0:
