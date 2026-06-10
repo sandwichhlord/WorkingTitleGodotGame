@@ -1,5 +1,8 @@
 extends State
 
+func enter():
+	entity.current_jumps = entity.max_jumps
+
 func update(delta: float):
 	if not entity.is_on_floor():
 		fsm.change_state("Fall")

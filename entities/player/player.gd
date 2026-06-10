@@ -18,6 +18,7 @@ var facing_direction: int = 1
 @export var fall_gravity_multiplier: float = 2.0 # Heavy Fall
 @export var max_jumps: int = 2
 @export var coyote_time: float = 0.15 # 150 milliseconds of grace time
+@export var jump_buffer_time: float = 0.1
 
 var current_jumps: int = 0
 
@@ -36,7 +37,5 @@ func _physics_process(delta: float):
 			velocity += get_gravity() * jump_gravity_multiplier * delta
 		else:
 			velocity += get_gravity() * fall_gravity_multiplier * delta
-	else:
-		current_jumps = max_jumps
 		
 	move_and_slide()
