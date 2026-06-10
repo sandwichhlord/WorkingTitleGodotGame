@@ -17,6 +17,8 @@ var facing_direction: int = 1
 @export var jump_gravity_multiplier: float = 0.8 # Floaty Jump
 @export var fall_gravity_multiplier: float = 2.0 # Heavy Fall
 @export var max_jumps: int = 2
+@export var coyote_time: float = 0.15 # 150 milliseconds of grace time
+
 var current_jumps: int = 0
 
 func _ready() -> void:

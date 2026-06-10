@@ -1,9 +1,15 @@
 extends State
 
+var coyote_timer: float = 0.0
+var is_coyote_falling: bool = false
+
 func enter():
 	# If we have max jumps while falling, it means we walked off a ledge.
 	if entity.current_jumps == entity.max_jumps:
-		entity.current_jumps -= 1
+		is_coyote_falling = true
+		coyote_timer = entity.coyote_time
+	else:
+		is_coyote_falling = false
 
 func update(delta: float):
 	
@@ -15,7 +21,13 @@ func update(delta: float):
 		else:
 			fsm.change_state("Idle")
 		return
-	
+		
+	if is_coyote_falling:
+		coyote_timer -= delta
+		if coyote_timer <= 0.0:
+			is_coyote_falling = false
+			entity.current_jumps -= 1 # Remove a jump after coyote buffer
+
 	if direction != 0:
 		entity.velocity.x = move_toward(entity.velocity.x, direction * entity.max_speed, entity.acceleration * delta)
 	else:
