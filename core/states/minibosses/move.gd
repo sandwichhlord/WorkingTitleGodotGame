@@ -1,19 +1,17 @@
 extends State
 
-@export var speed : float = 180.0
-@export var height : float = 250.0
-@export var attack_interval : float = 2
+@export var speed : float = 150.0
 
 
 @onready var fsm_node: Node = get_parent()
 @onready var boss: CharacterBody2D = get_parent().get_parent()
 
-var attack_timer : float = 0.0
-
 func enter() -> void:
-	attack_timer = 0.0;
-	var start_speed = mod_speed()        #variable speed as if changes per stage
-	boss.velocity = Vector2(-start_speed,0)     #moves towards left at first 
+	if not boss.is_light_on :
+		boss.target = boss.top
+		return
+		
+	_pick_new_target()
 	
 func exit() -> void:
 	boss.velocity = Vector2.ZERO
@@ -22,30 +20,36 @@ func update(delta: float) -> void:
 	if not boss:
 		return
 	
-	boss.global_position.y = height
+	var current_speed = mod_speed()
+	# updates the global position of the boss
+	boss.global_position = boss.global_position.move_toward(
+		boss.target,
+		current_speed*delta
+	)
 	
-	if boss.is_on_wall():
-		var wall_normal = boss.get_wall_normal()    #wall normal tells the perpendicular direction and reverses it
-		boss.velocity.x = wall_normal.x * mod_speed()
+	if boss.global_position.distance_to(boss.target) < 5.0:
+		boss.global_position = boss.target
+		_arrive_at_point()
 		
-	else:
-		var cur = sign(boss.velocity.x)
-		boss.velocity.x = cur* mod_speed()
-		
-	boss.move_and_slide()
-	
-	attack_timer += delta
-	if attack_timer >= curr_interval():        #cinterval which would help us change the speed of attacks 
-		attack_timer = 0.0
-		decide_attack()
-	
-		
-func curr_interval() -> float :
-	if boss.current_stage == 3:
-		return 0.5 * attack_interval
-	else:
-		return attack_interval
 
+func _pick_new_target() -> void:
+	var points_pool = [boss.top, boss.left, boss.right]
+	
+	#never picks same point again
+	var valid_points = points_pool.filter(func(p): return p.distance_to(boss.global_position) > 10.0)
+	
+	if valid_points.size() > 0:
+		boss.target = valid_points.pick_random()
+
+
+
+func _arrive_at_point() -> void:
+	if boss.global_position == boss.top and not boss.is_light_on:
+		fsm_node.change_state("stagger")
+		return
+		
+	_pick_new_target()
+	 #decide_attack()
 
 
 func mod_speed() -> float:
@@ -57,13 +61,13 @@ func mod_speed() -> float:
 	
 
 
-func decide_attack() -> void:
-	if boss.current_stage == 1:
-		fsm.change_state("venom")
-	if boss.current_stage == 2:
-		fsm.change_state("suction")
-	elif boss.current_stage == 3:
-		if randf()>0.5:
-			fsm.change_state("venom")
-		else:
-			fsm.change_state("suction")
+#func decide_attack() -> void:
+#	if boss.current_stage == 1:
+#		fsm_node.change_state("venom")
+#	if boss.current_stage == 2:
+#		fsm_node.change_state("suction")
+#	elif boss.current_stage == 3:
+#		if randf()>0.5:
+#			fsm_node.change_state("venom")
+#		else:
+#			fsm_node.change_state("suction")
