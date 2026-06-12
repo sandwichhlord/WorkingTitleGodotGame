@@ -21,9 +21,11 @@ func enter() -> void:
 	boss.is_invulnerable = false
 	
 	if boss.current_stage == 3:
-		fsm.change_state("suction")
+		fsm_node.change_state("suction")
 	else :
-		fsm.change_state("move")
+		fsm_node.change_state("move")
 	
 func exit() -> void: pass
-func update(delta: float) -> void: pass
+
+func update(delta: float) -> void: 
+	pass

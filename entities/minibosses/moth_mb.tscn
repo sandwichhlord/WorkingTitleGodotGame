@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://cb7m6kpc5s0ot" path="res://core/states/minibosses/handler.gd" id="3_2e8th"]
 [ext_resource type="Script" uid="uid://x1ungeiot3d8" path="res://core/states/minibosses/move.gd" id="3_a1lbl"]
 [ext_resource type="Script" uid="uid://cnox8tqi4b5dj" path="res://core/components/HealthComponent.gd" id="3_p6pml"]
+[ext_resource type="Script" uid="uid://dfc4a75yqr2yn" path="res://core/states/minibosses/venom.gd" id="5_2neo3"]
+[ext_resource type="Script" uid="uid://bf04apayxkbwt" path="res://core/components/object_pool.gd" id="8_qn0gn"]
+[ext_resource type="PackedScene" uid="uid://cehmar1o8pfit" path="res://entities/minibosses/venom_proj.tscn" id="9_y2djd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1lbl"]
 
@@ -13,11 +16,9 @@
 script = ExtResource("1_1s2iw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2102078460]
-position = Vector2(996, 128)
 texture = ExtResource("2_a1lbl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=106949934]
-position = Vector2(996, 128)
 scale = Vector2(8, 8)
 shape = SubResource("CircleShape2D_a1lbl")
 
@@ -29,6 +30,7 @@ initial_state = NodePath("move")
 script = ExtResource("3_a1lbl")
 
 [node name="venom" type="Node" parent="fsm" unique_id=707835643]
+script = ExtResource("5_2neo3")
 
 [node name="suction" type="Node" parent="fsm" unique_id=247830227]
 
@@ -37,3 +39,8 @@ script = ExtResource("3_2e8th")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1725571769]
 script = ExtResource("3_p6pml")
+
+[node name="ProjectilePool" type="Node" parent="." unique_id=2086276761]
+script = ExtResource("8_qn0gn")
+projectile_scene = ExtResource("9_y2djd")
+pool_size = 100

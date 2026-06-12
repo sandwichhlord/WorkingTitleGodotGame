@@ -49,7 +49,7 @@ func _arrive_at_point() -> void:
 		return
 		
 	_pick_new_target()
-	 #decide_attack()
+	decide_attack()
 
 
 func mod_speed() -> float:
@@ -61,13 +61,13 @@ func mod_speed() -> float:
 	
 
 
-#func decide_attack() -> void:
-#	if boss.current_stage == 1:
-#		fsm_node.change_state("venom")
-#	if boss.current_stage == 2:
-#		fsm_node.change_state("suction")
-#	elif boss.current_stage == 3:
-#		if randf()>0.5:
-#			fsm_node.change_state("venom")
-#		else:
-#			fsm_node.change_state("suction")
+func decide_attack() -> void:
+	if boss.current_stage == 1:
+		fsm_node.change_state("venom")
+	if boss.current_stage == 2:
+		fsm_node.change_state("suction")
+	elif boss.current_stage == 3:
+		if randf()>0.5:
+			fsm_node.change_state("venom")
+		else:
+			fsm_node.change_state("suction")
