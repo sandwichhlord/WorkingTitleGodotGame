@@ -5,9 +5,9 @@ class_name MiniBoss
 @export var is_invulnerable:bool = false
 
 # locations on this board for boss
-@export var top : Vector2 = Vector2(640,150)
-@export var left : Vector2 = Vector2(340,450)
-@export var right : Vector2 = Vector2(940,450)
+@export var top : Vector2 = Vector2(640,100)
+@export var left : Vector2 = Vector2(340,300)
+@export var right : Vector2 = Vector2(940,300)
 @export var speed : float = 200.0
 
 @export var target: Vector2 = Vector2.ZERO
@@ -23,6 +23,8 @@ func _ready() -> void:
 		
 	global_position = top
 	target = top
+	
+	fsm_node.change_state("move")
 
 func _on_health_changed(current_health, max_health) -> void:
 	if is_invulnerable:
