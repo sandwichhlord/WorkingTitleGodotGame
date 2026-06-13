@@ -17,3 +17,6 @@ func update(delta: float):
 		
 	if Input.is_action_just_pressed("jump"):
 		fsm.change_state("Jump")
+		
+	if Input.is_action_just_pressed("dash") and entity.can_dash: 
+		fsm.change_state("Dash")	
