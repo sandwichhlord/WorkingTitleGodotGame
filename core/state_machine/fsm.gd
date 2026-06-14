@@ -10,17 +10,20 @@ var current_state: State
 # _ready() assigns the current fsm to all its children
 func _ready() -> void:
 	await get_parent().ready
-	
+	#initial_state = patrol.new()
 	for child in get_children():
 		if child is State:
+			
 			child.fsm = self            
 			
+	
 	current_state = initial_state
 	current_state.enter()
 
 
 # typical physics process
 func _physics_process(delta: float) -> void:
+	
 	if current_state:
 		current_state.update(delta)
 

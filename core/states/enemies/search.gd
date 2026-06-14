@@ -14,6 +14,7 @@ func enter():
 func update(delta: float) -> void:
 #	logic for determining random movements
 #0 = idle, 1 = walk right, -1 = walk left
+	
 	enemy.timer-=delta
 	if enemy.time<=0:
 		enemy.time = randf_range(1,2)
@@ -26,13 +27,13 @@ func update(delta: float) -> void:
 	else:
 		enemy.get_node("Sprite2D").flip_h = 0
 		enemy.raycast.target_position = Vector2(92,0)
-	enemy.timer-=delta
+	enemy.time-=delta
 
 	if enemy.raycast.is_colliding():
 		var collider = enemy.raycast.get_collider()
 		#	checking raycast collisions with main player
 		if collider.is_in_group("Mainplayer"):
-			enemy.change_state(enemy.a_state)
+			fsm.change_state("chase")
 #	timer to go from alerted (search) state to passive (patrol) state
 	if enemy.timer <= 0:
-		enemy.change_state(enemy.p_state)
+		fsm.change_state("patrol")

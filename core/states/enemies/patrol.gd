@@ -12,6 +12,7 @@ func enter():
 func update( delta: float) -> void:
 	#	logic for determining random movements
 	#0 = idle, 1 = walk right, -1 = walk left
+	
 	if enemy.time<=0:
 		enemy.time = randf_range(1,2)
 		enemy.choice = randi_range(-1,1)
@@ -30,5 +31,5 @@ func update( delta: float) -> void:
 		var collider = enemy.raycast.get_collider()
 #		checking main player collision
 		if collider.is_in_group("Mainplayer"):
-			enemy.change_state(enemy.a_state)
+			fsm.change_state("chase")
 	

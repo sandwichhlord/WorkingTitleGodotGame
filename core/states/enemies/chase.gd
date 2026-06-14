@@ -13,10 +13,10 @@ func update( delta: float) -> void:
 	if enemy.raycast.is_colliding():
 		var collider = enemy.raycast.get_collider()
 #		if player is not in the direct eyesight of the enemy, switch to search state
-		if collider.is_in_group("Mainplayer"):
-			enemy.change_state(enemy.s_state)
+		if !collider.is_in_group("Mainplayer"):
+			fsm.change_state("search")
 	else:
-		enemy.change_state(enemy.s_state)
+		fsm.change_state("search")
 	
 	if enemy.velocity.x<0:
 		enemy.get_node("Sprite2D").flip_h = 1
@@ -24,4 +24,4 @@ func update( delta: float) -> void:
 	else:
 		enemy.get_node("Sprite2D").flip_h = 0
 		enemy.raycast.target_position = Vector2(92,0)
-	enemy.position = enemy.position.move_toward(enemy.m_enemy.position, enemy.ag_speed*delta)
+	enemy.position.x = move_toward(enemy.position.x,player.position.x, enemy.ag_speed*delta)
