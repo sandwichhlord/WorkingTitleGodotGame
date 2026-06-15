@@ -1,30 +1,33 @@
 extends Area2D
 class_name  Hitbox
 
-#@export var hitbox_lifetime: float
-@export var shape : Shape2D
-@export var target_mask: int 
+@export var hitbox_lifetime: float
+@export var shape: Shape2D
+@export var target_mask: int
 @export var damage: float
 # just assigning the variables on initialization
 # as this isnt a permanent thing and only appears when attacks
 #
 # For infinitely long hitbox, set timer = 0.0
-#func _init(_damage: float, _hitbox_lifetime : float, _shape : Shape2D, _target_mask: int) -> void:
-	#hitbox_lifetime = _hitbox_lifetime
-	#shape = _shape
-	#target_mask = _target_mask
-	#damage = _damage
-	
+func _init(_damage: float, _hitbox_lifetime : float, _shape : Shape2D, _target_mask: int) -> void:
+	hitbox_lifetime = _hitbox_lifetime
+	shape = _shape
+	target_mask = _target_mask
+	damage = _damage
+	print("init was called")
+
+
 func _ready() -> void:
 	monitorable = false
+	monitoring = true
 	area_entered.connect(_on_area_entered)
 	
-	#if hitbox_lifetime > 0.0 :
-		#var new_timer = Timer.new()
-		#add_child(new_timer)
-		#new_timer.timeout.connect(queue_free)
-		#new_timer.call_deferred("start",hitbox_lifetime)
-	#
+	if hitbox_lifetime > 0.0 :
+		var new_timer = Timer.new()
+		add_child(new_timer)
+		new_timer.timeout.connect(queue_free)
+		new_timer.call_deferred("start",hitbox_lifetime)
+	
 	if shape:
 		var collision_shape = CollisionShape2D.new()
 		collision_shape.shape = shape
@@ -35,10 +38,13 @@ func _ready() -> void:
 	set_collision_mask_value(1, false)
 	set_collision_mask_value(target_mask, true)
 	
+
 # default on area entered script
 # if area doesnt have recieve hit dont do anything
+
 func _on_area_entered(area: Area2D) -> void:
 	#print("area entered")
+	#print(area.name)
 	if not area.has_method("recieve_hit"):
 		return
 	area.recieve_hit(damage)
@@ -46,3 +52,5 @@ func _on_area_entered(area: Area2D) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+	
