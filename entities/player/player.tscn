@@ -25,30 +25,34 @@ region_rect = Rect2(19, 0, 109, 128)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=86942051]
 shape = SubResource("RectangleShape2D_bls4j")
 
-[node name="fsm" type="Node" parent="." unique_id=1966437112 node_paths=PackedStringArray("initial_state")]
+[node name="fsm_movement" type="Node" parent="." unique_id=1966437112 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_abrql")
 initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://bu4ynbabltdlj"
 
-[node name="Idle" type="Node" parent="fsm" unique_id=491500609]
+[node name="Idle" type="Node" parent="fsm_movement" unique_id=491500609]
 script = ExtResource("3_bls4j")
 metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 
-[node name="Run" type="Node" parent="fsm" unique_id=1454273869]
+[node name="Run" type="Node" parent="fsm_movement" unique_id=1454273869]
 script = ExtResource("4_fkugw")
 metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 
-[node name="Fall" type="Node" parent="fsm" unique_id=65991817]
+[node name="Fall" type="Node" parent="fsm_movement" unique_id=65991817]
 script = ExtResource("6_8fjmc")
 metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 
-[node name="Jump" type="Node" parent="fsm" unique_id=2088501665]
+[node name="Jump" type="Node" parent="fsm_movement" unique_id=2088501665]
 script = ExtResource("7_qiwj3")
 metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 
-[node name="Dash" type="Node" parent="fsm" unique_id=997848495]
+[node name="Dash" type="Node" parent="fsm_movement" unique_id=997848495]
 script = ExtResource("8_26q78")
 metadata/_custom_type_script = "uid://d2rmhow8byx6a"
+
+[node name="fsm_action" type="Node" parent="." unique_id=686622129]
+script = ExtResource("2_abrql")
+metadata/_custom_type_script = "uid://bu4ynbabltdlj"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1266212125]
 position_smoothing_enabled = true
