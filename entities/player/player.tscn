@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://7qa1qtsdm2mg" path="res://core/states/player/fall.gd" id="6_8fjmc"]
 [ext_resource type="Script" uid="uid://d4mkuy7615orh" path="res://core/states/player/jump.gd" id="7_qiwj3"]
 [ext_resource type="Script" uid="uid://dl3ati720s5km" path="res://core/states/player/dash.gd" id="8_26q78"]
+[ext_resource type="Script" uid="uid://x7kb6g1s3dds" path="res://core/states/player/action_states/ready.gd" id="9_wvtmh"]
+[ext_resource type="Script" uid="uid://d2rmhow8byx6a" path="res://core/state_machine/State.gd" id="10_7thud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bls4j"]
 size = Vector2(18, 20)
@@ -53,6 +55,26 @@ metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 [node name="fsm_action" type="Node" parent="." unique_id=686622129]
 script = ExtResource("2_abrql")
 metadata/_custom_type_script = "uid://bu4ynbabltdlj"
+
+[node name="Ready" type="Node" parent="fsm_action" unique_id=523296862]
+script = ExtResource("9_wvtmh")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"
+
+[node name="Attack_1" type="Node" parent="fsm_action" unique_id=1247723771]
+script = ExtResource("10_7thud")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"
+
+[node name="Attack_2" type="Node" parent="fsm_action" unique_id=2137712864]
+script = ExtResource("10_7thud")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"
+
+[node name="Attack_3" type="Node" parent="fsm_action" unique_id=1146430440]
+script = ExtResource("10_7thud")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"
+
+[node name="Ranged_Attack" type="Node" parent="fsm_action" unique_id=1140524569]
+script = ExtResource("10_7thud")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1266212125]
 position_smoothing_enabled = true

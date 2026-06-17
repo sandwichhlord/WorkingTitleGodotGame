@@ -9,7 +9,7 @@ var facing_direction: int = 1
 
 # References
 @onready var sprite = $Sprite2D
-@onready var fsm = $fsm
+@onready var fsm = $fsm_movement
 @onready var camera = $Camera2D
 
 # Jump/Gravity Variables
