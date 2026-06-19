@@ -6,6 +6,7 @@ extends State
 @onready var boss : CharacterBody2D = get_parent().get_parent()
 
 func enter() -> void:
+	print("Handler entered")
 	boss.current_stage += 1
 	print("Boss in stage: ",boss.current_stage)
 	
@@ -20,12 +21,10 @@ func enter() -> void:
 	await get_tree().create_timer(duration).timeout
 	boss.is_invulnerable = false
 	
-	if boss.current_stage == 3:
-		fsm_node.change_state("suction")
-	else :
-		fsm_node.change_state("move")
+	fsm_node.change_state("suction")
 	
-func exit() -> void: pass
+func exit() -> void: 
+	pass
 
 func update(delta: float) -> void: 
 	pass
