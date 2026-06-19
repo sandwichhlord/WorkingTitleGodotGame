@@ -20,4 +20,7 @@ func update(delta: float) -> void:
 	
 
 func _recover() -> void:
-	fsm_node.change_state("move")
+	if boss.current_stage == 1:
+		fsm_node.change_state("move")
+	elif boss.current_stage >= 2:
+		fsm_node.change_state("suction")
