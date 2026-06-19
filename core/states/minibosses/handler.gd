@@ -7,7 +7,6 @@ extends State
 
 func enter() -> void:
 	print("Handler entered")
-	boss.current_stage += 1
 	print("Boss in stage: ",boss.current_stage)
 	
 	boss.is_invulnerable = true
