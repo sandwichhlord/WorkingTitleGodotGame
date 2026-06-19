@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	add_child(active_contact_hitbox)
 	
-	)
+
 
 func _on_health_changed(current_health, max_health) -> void:
 	if is_invulnerable:
