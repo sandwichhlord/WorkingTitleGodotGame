@@ -16,6 +16,8 @@ class_name MiniBoss
 
 @onready var health_component = $HealthComponent
 @onready var fsm_node = $fsm
+@export var active_contact_hitbox: Hitbox
+
 
 func _ready() -> void:
 	if health_component:
@@ -30,20 +32,29 @@ func _ready() -> void:
 	var body_shape = CircleShape2D.new()
 	body_shape.radius = 30.0
 	
-	var contact_hitbox = Hitbox.new(15.0, 0.0, body_shape, 1)
+	active_contact_hitbox = Hitbox.new(15.0, 0.0, body_shape, 1)
 	
-	add_child(contact_hitbox)
+	add_child(active_contact_hitbox)
 	
+	)
 
 func _on_health_changed(current_health, max_health) -> void:
 	if is_invulnerable:
 		return
 	print("TRIPWIRE . HP is now: ",current_health)
 	if current_stage==1 and current_health <= (max_health*0.5):
-		print("Attempting to change to handler")
+		current_stage=2
+		base_damage *= 1.5
+		if active_contact_hitbox:
+			active_contact_hitbox.damage = base_damage * 1.5
 		fsm_node.change_state("handler")
 		
+		
 	if current_stage==2 and current_health <= (max_health*0.3):
+		current_stage=3
+		base_damage*2
+		if active_contact_hitbox:
+			active_contact_hitbox.damage = base_damage*2
 		fsm_node.change_state("handler")
 		
 
