@@ -1,21 +1,23 @@
 extends State
 
 func enter():
-	entity.current_jumps = entity.max_jumps
-
+	entity.velocity.y = entity.jump_velocity
+	entity.current_jumps -= 1
+	
 func update(delta: float):
-	if not entity.is_on_floor():
+	if entity.is_movement_locked: return
+	var direction = Input.get_axis("move_left","move_right")
+	
+	if entity.velocity.y >= 0:
 		fsm.change_state("Fall")
 		return
-	
-	var direction = Input.get_axis("move_left","move_right")
 	
 	if direction != 0:
 		entity.velocity.x = move_toward(entity.velocity.x, direction * entity.max_speed, entity.acceleration * delta)
 	else:
-		fsm.change_state("Idle")
+		entity.velocity.x = move_toward(entity.velocity.x, 0, entity.friction * delta)
 		
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and entity.current_jumps > 0:
 		fsm.change_state("Jump")
 		
 	if Input.is_action_just_pressed("dash") and entity.can_dash: 

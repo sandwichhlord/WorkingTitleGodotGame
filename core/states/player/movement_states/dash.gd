@@ -12,7 +12,7 @@ func enter():
 	entity.dash_cooldown_timer = entity.dash_cooldown
 
 func update(delta: float):
-	
+	if entity.is_movement_locked: return
 	dash_timer-=delta
 	if dash_timer <= 0.0:
 		if entity.is_on_floor():
