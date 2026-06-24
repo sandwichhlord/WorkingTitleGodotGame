@@ -5,9 +5,12 @@ extends State
 
 @onready var pool : Node = boss.get_node_or_null("ProjectilePool")
 
-
+@export var attack_timer : float = 0.0 #timer to track when the boss attacks
+@export var is_attacking : bool = false
 func enter() -> void:
 	boss.velocity = Vector2.ZERO
+	attack_timer = 0.0
+	is_attacking = false
 	
 	await get_tree().create_timer(0.2).timeout
 	
@@ -21,8 +24,15 @@ func exit() -> void:
 	pass
 	
 func update(delta:float) -> void:
-	pass
+	attack_timer+=delta 
 	
+	#all this happens at 0.2 seconds
+	if attack_timer>=0.2 and not is_attacking:
+		_shoot()
+		is_attacking = true
+	
+	elif attack_timer >=0.4:
+		fsm_node.change_state("move")
 
 func _shoot() -> void:
 	if not pool:
