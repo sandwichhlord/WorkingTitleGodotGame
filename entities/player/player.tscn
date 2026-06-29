@@ -88,12 +88,17 @@ size = Vector2(16, 18)
 [node name="Player" type="CharacterBody2D" unique_id=1225824840]
 script = ExtResource("1_symyc")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2054789738]
+[node name="Visuals" type="Node2D" parent="." unique_id=2100655489]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=2054789738]
 position = Vector2(1.9073486e-06, -1.9073486e-06)
 scale = Vector2(0.15625, 0.15625)
 texture = ExtResource("2_fkugw")
 region_enabled = true
 region_rect = Rect2(19, 0, 109, 128)
+
+[node name="GunPosition" type="Marker2D" parent="Visuals" unique_id=1209900380]
+position = Vector2(44, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=86942051]
 shape = SubResource("RectangleShape2D_bls4j")
