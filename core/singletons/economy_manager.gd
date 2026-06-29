@@ -80,4 +80,10 @@ func handle_player_death() -> void:
 	for type in balances:
 		balances[type] = int(balances[type] * death_retention[type])
 		balance_updated.emit(type, balances[type], stashed_balances[type])
+
+
+func serialize() -> Dictionary:
+	return balances
+	pass
+func deserialize(data: Dictionary) -> void:
 	pass
