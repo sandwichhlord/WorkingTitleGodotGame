@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bq3fhnnfn5lth"]
+
+[ext_resource type="PackedScene" uid="uid://upf83pbbuw2q" path="res://entities/items/economy/base_loot.tscn" id="1_sy0po"]
+[ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="2_i0mbm"]
+
+[node name="Coin" unique_id=1885931662 instance=ExtResource("1_sy0po")]
+
+[node name="Sprite2D" parent="." index="1" unique_id=1884574012]
+scale = Vector2(0.296875, 0.3359375)
+texture = ExtResource("2_i0mbm")

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b7hbbqen2adqs"]
+
+[ext_resource type="PackedScene" uid="uid://upf83pbbuw2q" path="res://entities/items/economy/base_loot.tscn" id="1_1fjai"]
+[ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="2_lfof0"]
+
+[node name="Secondary" unique_id=1885931662 instance=ExtResource("1_1fjai")]
+currency_type = 1
+
+[node name="Sprite2D" parent="." index="1" unique_id=1884574012]
+scale = Vector2(0.953125, 0.421875)
+texture = ExtResource("2_lfof0")

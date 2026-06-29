@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://upf83pbbuw2q"]
+
+[ext_resource type="Script" uid="uid://c6tgo2ajcg7c7" path="res://entities/items/economy/base_loot.gd" id="1_agova"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cc8g3"]
+
+[node name="BaseLoot" type="Area2D" unique_id=1885931662]
+script = ExtResource("1_agova")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1127251960]
+shape = SubResource("CircleShape2D_cc8g3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1884574012]
