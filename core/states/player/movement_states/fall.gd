@@ -13,7 +13,7 @@ func enter():
 		is_coyote_falling = false
 
 func update(delta: float):
-	
+	if entity.is_movement_locked: return
 	var direction = Input.get_axis("move_left","move_right")
 	
 	if entity.is_on_floor():

@@ -9,7 +9,7 @@ var facing_direction: int = 1
 
 # References
 @onready var sprite = $Sprite2D
-@onready var fsm = $fsm
+@onready var fsm = $fsm_movement
 @onready var camera = $Camera2D
 
 # Jump/Gravity Variables
@@ -42,6 +42,11 @@ var can_dash: bool = true
 var camera_idle_timer: float = 0.0
 var current_target_zoom = default_zoom
 var target_offset_y = 0.0
+
+var is_movement_locked: bool = false
+
+var bonus_damage_additive: float = 0.0
+var bonus_damage_multiplier: float = 1.0
 
 func _ready() -> void:
 	pass
@@ -94,4 +99,7 @@ func camera_process(delta):
 		camera_idle_timer += delta 
 		if camera_idle_timer >= time_before_camera_center:
 			camera.offset.x = lerp(camera.offset.x, 0.0, camera_lerp_smoothening * delta)
+	
+func get_total_damage(base_damage: float) -> float:
+	return (base_damage + bonus_damage_additive) * bonus_damage_multiplier
 	
