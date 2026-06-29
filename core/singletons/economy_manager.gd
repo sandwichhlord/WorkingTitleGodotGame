@@ -89,7 +89,10 @@ func handle_player_death() -> void:
 
 
 func serialize() -> Dictionary:
-	return _balances
-	pass
+	return {
+		"balances": _balances.duplicate(),
+		"stashed": _stashed_balances.duplicate()
+	}
+
 func deserialize(data: Dictionary) -> void:
 	pass
