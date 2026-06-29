@@ -8,7 +8,7 @@ class_name Player
 var facing_direction: int = 1
 
 # References
-@onready var sprite = $Sprite2D
+@onready var visuals = $Visuals
 @onready var fsm = $fsm_movement
 @onready var camera = $Camera2D
 
@@ -56,7 +56,7 @@ func _physics_process(delta: float):
 	var direction = Input.get_axis("move_left","move_right")
 	if direction != 0:
 		facing_direction = sign(direction)
-		sprite.flip_h = (direction < 0)
+		visuals.scale.x = facing_direction
 		
 	if not is_on_floor():
 		if velocity.y < 0 and Input.is_action_pressed("jump"):
