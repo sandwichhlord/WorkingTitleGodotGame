@@ -2,6 +2,7 @@ extends Node
 
 signal balance_updated(currency_type: int, on_hand_amount: int, stashed_amount: int)
 signal max_currency_reached(currency_type: int)
+signal insufficient_funds(currency_type: int)
 
 enum Currency { GOLD, SECONDARY, TERT }
 
@@ -51,6 +52,7 @@ func spend_currency(type: Currency, amount: int) -> bool:
 		balance_updated.emit(type, _balances[type], _stashed_balances[type])
 		return true
 	else: # Maybe add auto withdraw from bank in future using else if balances[type] + stashed_balances[type] - amount >= 0:
+		insufficient_funds.emit(type)
 		return false
 	
 
