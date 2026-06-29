@@ -9,8 +9,13 @@
 [ext_resource type="Script" uid="uid://dfc4a75yqr2yn" path="res://core/states/minibosses/venom.gd" id="5_2neo3"]
 [ext_resource type="Script" uid="uid://bf04apayxkbwt" path="res://core/components/object_pool.gd" id="8_qn0gn"]
 [ext_resource type="PackedScene" uid="uid://cehmar1o8pfit" path="res://entities/minibosses/venom_proj.tscn" id="9_y2djd"]
+[ext_resource type="Script" uid="uid://fnsv3jys50gi" path="res://core/components/HurtboxComponent.gd" id="10_hcoax"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1lbl"]
+radius = 7.5259967
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_drrdd"]
+radius = 77.0
 
 [node name="MothMB" type="CharacterBody2D" unique_id=1584721735]
 script = ExtResource("1_1s2iw")
@@ -39,8 +44,17 @@ script = ExtResource("3_2e8th")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1725571769]
 script = ExtResource("3_p6pml")
+max_health = 1000.0
 
 [node name="ProjectilePool" type="Node" parent="." unique_id=2086276761]
 script = ExtResource("8_qn0gn")
 projectile_scene = ExtResource("9_y2djd")
 pool_size = 100
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=808030982]
+script = ExtResource("10_hcoax")
+target_mask = 2
+metadata/_custom_type_script = "uid://fnsv3jys50gi"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=1636441661]
+shape = SubResource("CircleShape2D_drrdd")

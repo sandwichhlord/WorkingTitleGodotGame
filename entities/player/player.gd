@@ -51,6 +51,9 @@ var bonus_damage_multiplier: float = 1.0
 func _ready() -> void:
 	pass
 	
+func recieve_hit(damage: int) -> void:
+	$HealthComponent.take_damage(damage)
+	
 func _physics_process(delta: float):
 	
 	var direction = Input.get_axis("move_left","move_right")
