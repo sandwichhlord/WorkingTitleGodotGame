@@ -12,8 +12,11 @@
 [ext_resource type="Script" uid="uid://d05x6rr3b4yj7" path="res://core/states/player/action_states/attack_1.gd" id="10_yqrof"]
 [ext_resource type="Script" uid="uid://drk85woue85ut" path="res://core/states/player/action_states/attack_2.gd" id="11_3wlsy"]
 [ext_resource type="Script" uid="uid://23h3hlkubqft" path="res://core/states/player/action_states/attack_3.gd" id="12_b2kln"]
+[ext_resource type="Script" uid="uid://cgnnnuw0jpmsm" path="res://core/states/player/action_states/ranged_attack.gd" id="13_yqrof"]
 [ext_resource type="Script" uid="uid://cnox8tqi4b5dj" path="res://core/components/HealthComponent.gd" id="14_mtric"]
+[ext_resource type="Script" uid="uid://bf04apayxkbwt" path="res://core/components/object_pool.gd" id="16_3wlsy"]
 [ext_resource type="Script" uid="uid://fnsv3jys50gi" path="res://core/components/HurtboxComponent.gd" id="16_221hk"]
+[ext_resource type="PackedScene" uid="uid://d2qrx1js6tml3" path="res://entities/player/bullet.tscn" id="17_3wlsy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bls4j"]
 size = Vector2(18, 20)
@@ -141,6 +144,10 @@ metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 script = ExtResource("12_b2kln")
 metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 
+[node name="Ranged_Attack" type="Node" parent="fsm_action" unique_id=1017392790]
+script = ExtResource("13_yqrof")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1266212125]
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
@@ -163,3 +170,8 @@ metadata/_custom_type_script = "uid://fnsv3jys50gi"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=114642847]
 shape = SubResource("RectangleShape2D_yqrof")
+
+[node name="ProjectilePool" type="Node" parent="." unique_id=1216140588]
+script = ExtResource("16_3wlsy")
+projectile_scene = ExtResource("17_3wlsy")
+pool_size = 3
