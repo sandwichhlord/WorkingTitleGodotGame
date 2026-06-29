@@ -100,4 +100,5 @@ func serialize() -> Dictionary:
 	}
 
 func deserialize(data: Dictionary) -> void:
+	# Gotta make this later
 	pass
