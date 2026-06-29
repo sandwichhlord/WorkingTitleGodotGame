@@ -44,6 +44,9 @@ func update(delta: float):
 	else:
 		entity.velocity.x = move_toward(entity.velocity.x, 0, entity.friction * delta)
 		
+	if Input.is_action_just_pressed("dash") and entity.can_dash: 
+		fsm.change_state("Dash")	
+	
 	if Input.is_action_just_pressed("jump"):
 		if entity.current_jumps > 0:
 			fsm.change_state("Jump")

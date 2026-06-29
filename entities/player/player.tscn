@@ -7,8 +7,10 @@
 [ext_resource type="Script" uid="uid://si0pfn7ylw81" path="res://core/states/player/run.gd" id="4_fkugw"]
 [ext_resource type="Script" uid="uid://7qa1qtsdm2mg" path="res://core/states/player/fall.gd" id="6_8fjmc"]
 [ext_resource type="Script" uid="uid://d4mkuy7615orh" path="res://core/states/player/jump.gd" id="7_qiwj3"]
+[ext_resource type="Script" uid="uid://dl3ati720s5km" path="res://core/states/player/dash.gd" id="8_26q78"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bls4j"]
+size = Vector2(18, 20)
 
 [node name="Player" type="CharacterBody2D" unique_id=1225824840]
 script = ExtResource("1_symyc")
@@ -44,4 +46,16 @@ metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 script = ExtResource("7_qiwj3")
 metadata/_custom_type_script = "uid://d2rmhow8byx6a"
 
+[node name="Dash" type="Node" parent="fsm" unique_id=997848495]
+script = ExtResource("8_26q78")
+metadata/_custom_type_script = "uid://d2rmhow8byx6a"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1266212125]
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.3
+drag_top_margin = 0.3
+drag_right_margin = 0.3
+drag_bottom_margin = 0.3

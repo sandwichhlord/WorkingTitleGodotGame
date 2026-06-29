@@ -22,6 +22,14 @@ var facing_direction: int = 1
 
 var current_jumps: int = 0
 
+# Dash Variables
+@export var dash_speed: float = 800.0
+@export var dash_duration: float = 0.2
+@export var dash_cooldown: float = 0.5
+var dash_cooldown_timer: float = 0.0
+var can_dash: bool = true
+
+
 func _ready() -> void:
 	pass
 	
@@ -38,4 +46,9 @@ func _physics_process(delta: float):
 		else:
 			velocity += get_gravity() * fall_gravity_multiplier * delta
 		
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
+	else:
+		if is_on_floor():
+			can_dash = true
 	move_and_slide()
