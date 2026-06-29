@@ -45,6 +45,11 @@ func add_currency(type: Currency, amount: int) -> void:
 func can_afford(type: Currency, amount: int) -> bool:
 	return _balances[type] >= amount
 
+func get_balance(type: Currency) -> int:
+	return _balances[type]
+
+func get_stashed(type: Currency) -> int:
+	return _stashed_balances[type]
 
 func spend_currency(type: Currency, amount: int) -> bool:
 	if _balances[type] >= amount:
@@ -63,9 +68,12 @@ func deposit(type: Currency, amount: int) -> bool:
 		balance_updated.emit(type, _balances[type], _stashed_balances[type])
 		return true
 	else:
+		insufficient_funds.emit(type)
 		return false
 
 # Returns how much currency has been withdrew
+# If _balances[type] is already at _max_currency[type], then to_add computes to 0, 
+# The caller can't distinguish "stash was empty" from "wallet was already full."
 func withdraw(type: Currency, amount: int) -> int :
 	var to_add = 0
 	if _stashed_balances[type] >= amount:
