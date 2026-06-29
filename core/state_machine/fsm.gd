@@ -17,9 +17,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			child.fsm = self            
-			
-			# assigning the entity to the child 
-			child.entity = body
+		
 	current_state = initial_state
 	current_state.enter()
 
@@ -36,7 +34,8 @@ func change_state(target_state_name: String) -> void:
 	if not new_state: 
 		return
 		
-	current_state.exit()
+	if current_state != null :
+		current_state.exit()
 	current_state = new_state
 	current_state.enter()
 	
