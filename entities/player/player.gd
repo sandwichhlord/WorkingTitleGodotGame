@@ -10,6 +10,7 @@ var facing_direction: int = 1
 # References
 @onready var sprite = $Sprite2D
 @onready var fsm = $fsm
+@onready var camera = $Camera2D
 
 # Jump/Gravity Variables
 
@@ -29,6 +30,18 @@ var current_jumps: int = 0
 var dash_cooldown_timer: float = 0.0
 var can_dash: bool = true
 
+# Camera Variables
+
+@export var default_zoom: Vector2 = Vector2(1, 1) 
+@export var map_zoom: Vector2 = Vector2(0.2, 0.2)     
+@export var look_vertical_distance: float = 300.0    
+@export var time_before_camera_center: float = 1.5 
+@export var target_offset_x: float = 550.0
+@export var camera_lerp_smoothening: float = 1.5
+
+var camera_idle_timer: float = 0.0
+var current_target_zoom = default_zoom
+var target_offset_y = 0.0
 
 func _ready() -> void:
 	pass
@@ -52,3 +65,33 @@ func _physics_process(delta: float):
 		if is_on_floor():
 			can_dash = true
 	move_and_slide()
+	camera_process(delta)
+
+func camera_process(delta): 
+	
+#	if Input.is_action_pressed("map"):
+#		current_target_zoom = map_zoom
+#	else:
+#		current_target_zoom = default_zoom
+
+	if is_on_floor() and abs(velocity.x) == 0:
+		if Input.is_action_pressed("look_up"):
+			target_offset_y = -look_vertical_distance
+		elif Input.is_action_pressed("look_down"):
+			target_offset_y = look_vertical_distance
+		else:
+			target_offset_y = 0.0
+	else:
+		target_offset_y = 0.0 
+
+	camera.zoom = camera.zoom.lerp(current_target_zoom, camera_lerp_smoothening * delta)
+	camera.offset.y = lerp(camera.offset.y, target_offset_y, camera_lerp_smoothening * delta)
+	
+	if abs(velocity.x) > 0:
+		camera_idle_timer = 0.0
+		camera.offset.x = lerp(camera.offset.x, target_offset_x * facing_direction, camera_lerp_smoothening * delta)
+	else:
+		camera_idle_timer += delta 
+		if camera_idle_timer >= time_before_camera_center:
+			camera.offset.x = lerp(camera.offset.x, 0.0, camera_lerp_smoothening * delta)
+	
