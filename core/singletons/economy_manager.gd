@@ -65,22 +65,19 @@ func deposit(type: Currency, amount: int) -> bool:
 	else:
 		return false
 
-# Returns true if withdraw possible even if reaches max
-# Returns false if amount is greater than max withdraw possible (Maybe still withdraw the max possible in future)
-func withdraw(type: Currency, amount: int) -> bool:
+# Returns how much currency has been withdrew
+func withdraw(type: Currency, amount: int) -> int :
+	var to_add = 0
 	if _stashed_balances[type] >= amount:
 		if _balances[type] + amount > _max_currency[type]:
-			var to_add = _max_currency[type] - _balances[type]
-			_stashed_balances[type]-= to_add
-			_balances[type] = _max_currency[type]
+			to_add = _max_currency[type] - _balances[type]
 			max_currency_reached.emit(type)
 		else:
-			_balances[type] += amount
-			_stashed_balances[type] -= amount
+			to_add = amount
+		_balances[type] += to_add
+		_stashed_balances[type] -= to_add
 		balance_updated.emit(type, _balances[type], _stashed_balances[type])
-		return true
-	else:
-		return false
+	return to_add
 
 func handle_player_death() -> void:
 	for type in _balances:
