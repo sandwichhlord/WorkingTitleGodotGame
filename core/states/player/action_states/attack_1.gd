@@ -8,6 +8,7 @@ var queued_next_attack: bool = false
 @onready var anim_player = owner.get_node("AnimationPlayer")
 
 func enter():
+	anim_player.animation_finished.connect(_on_animation_finished)
 	queued_next_attack = false
 	anim_player.play("swing_1")
 	
@@ -18,13 +19,17 @@ func enter():
 	entity.add_child(hitbox)
 	hitbox.position.x = 30 * entity.facing_direction
 
+func exit():
+	anim_player.animation_finished.disconnect(_on_animation_finished)
+	
 func update(_delta: float):
 	if Input.is_action_just_pressed("attack"):
 		queued_next_attack = true
 		
 
-func _on_animation_finished():
-	if queued_next_attack:
-		fsm.change_state("Attack_2")
-	else:
-		fsm.change_state("Ready")
+func _on_animation_finished(anim_name: StringName):
+	if anim_name == "swing_1":
+		if queued_next_attack:
+			fsm.change_state("Attack_2")
+		else:
+			fsm.change_state("Ready")

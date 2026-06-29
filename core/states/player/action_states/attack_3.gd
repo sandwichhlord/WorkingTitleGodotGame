@@ -7,6 +7,7 @@ extends State
 @onready var anim_player = owner.get_node("AnimationPlayer")
 
 func enter():
+	anim_player.animation_finished.connect(_on_animation_finished)
 	entity.is_movement_locked = true
 	anim_player.play("swing_3")
 	
@@ -17,10 +18,9 @@ func enter():
 	hitbox.position.x = 50 * entity.facing_direction
 
 func exit():
+	anim_player.animation_finished.disconnect(_on_animation_finished)
 	entity.is_movement_locked = false
 
-func update(_delta: float):
-	pass
-
-func _on_animation_finished():
-	fsm.change_state("Ready")
+func _on_animation_finished(anim_name: StringName):
+	if anim_name == "swing_3":
+		fsm.change_state("Ready")
