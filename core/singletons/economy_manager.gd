@@ -41,6 +41,10 @@ func add_currency(type: Currency, amount: int) -> void:
 		_balances[type] += amount
 	balance_updated.emit(type, _balances[type], _stashed_balances[type])
 
+func can_afford(type: Currency, amount: int) -> bool:
+	return _balances[type] - amount >= 0
+
+
 func spend_currency(type: Currency, amount: int) -> bool:
 	if _balances[type] - amount >= 0:
 		_balances[type] -= amount
