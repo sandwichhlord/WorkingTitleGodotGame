@@ -42,11 +42,11 @@ func add_currency(type: Currency, amount: int) -> void:
 	balance_updated.emit(type, _balances[type], _stashed_balances[type])
 
 func can_afford(type: Currency, amount: int) -> bool:
-	return _balances[type] - amount >= 0
+	return _balances[type] >= amount
 
 
 func spend_currency(type: Currency, amount: int) -> bool:
-	if _balances[type] - amount >= 0:
+	if _balances[type] >= amount:
 		_balances[type] -= amount
 		balance_updated.emit(type, _balances[type], _stashed_balances[type])
 		return true
@@ -55,7 +55,7 @@ func spend_currency(type: Currency, amount: int) -> bool:
 	
 
 func deposit(type: Currency, amount: int) -> bool:
-	if _balances[type] - amount >= 0:
+	if _balances[type] >= amount:
 		_balances[type] -= amount
 		_stashed_balances[type] += amount
 		balance_updated.emit(type, _balances[type], _stashed_balances[type])
@@ -66,7 +66,7 @@ func deposit(type: Currency, amount: int) -> bool:
 # Returns true if withdraw possible even if reaches max
 # Returns false if amount is greater than max withdraw possible (Maybe still withdraw the max possible in future)
 func withdraw(type: Currency, amount: int) -> bool:
-	if _stashed_balances[type] - amount >= 0:
+	if _stashed_balances[type] >= amount:
 		if _balances[type] + amount > _max_currency[type]:
 			var to_add = _max_currency[type] - _balances[type]
 			_stashed_balances[type]-= to_add
