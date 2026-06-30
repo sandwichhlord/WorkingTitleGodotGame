@@ -53,14 +53,12 @@ script = ExtResource("7_2bnnh")
 metadata/_custom_type_script = "uid://dx5ow3laeoism"
 
 [node name="hurtbox" type="Area2D" parent="." unique_id=1490908728]
-visible = false
 position = Vector2(-0.667984, -0.66796875)
 script = ExtResource("8_hrgpp")
 target_mask = 2
 metadata/_custom_type_script = "uid://fnsv3jys50gi"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=756809121]
-visible = false
 position = Vector2(0.16798401, 0.16796875)
 shape = SubResource("RectangleShape2D_evu7n")
 
@@ -69,6 +67,5 @@ position = Vector2(5, -31)
 target_position = Vector2(200, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=330903893]
-visible = false
 position = Vector2(1.5, 6.375)
 shape = SubResource("RectangleShape2D_nt4vr")

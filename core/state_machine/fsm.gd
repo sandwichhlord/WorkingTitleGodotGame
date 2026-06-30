@@ -10,13 +10,13 @@ var current_state: State
 # _ready() assigns the current fsm to all its children
 func _ready() -> void:
 	await get_parent().ready
-	#initial_state = patrol.new()
+
+	var body = self.get_parent()
 	for child in get_children():
 		if child is State:
-			
 			child.fsm = self            
 			
-	
+			child.entity = body
 	current_state = initial_state
 	current_state.enter()
 

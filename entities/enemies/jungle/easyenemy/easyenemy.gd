@@ -16,7 +16,6 @@ var invincible = false
 @export var target_mask: int = 1
 @export var damage: float = 10
 
-	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,8 +35,13 @@ func _physics_process(delta):
 	move_and_slide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(delta: float) -> void:pass
+	#if hitbox == null:
+		#var hitbox = Hitbox.new(
+	#10,
+	#1.0,
+	#shape,
+	#1)
 
 func _on_died():
 	queue_free()

@@ -4,14 +4,7 @@ extends Node
 # Explicit type definitions so your code autocomplete works perfectly
 
 var fsm: Node
-#add enemys when enemies are made
-var enemy:
-	get:
-		return fsm.get_parent()
-		
-var player:
-	get:
-		return get_tree().get_first_node_in_group("Mainplayer")
+var entity : CharacterBody2D 
 
 # Virtual lifecycle methods to be overridden by child states
 func enter() -> void: pass

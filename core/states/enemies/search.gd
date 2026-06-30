@@ -8,32 +8,32 @@ func _ready() -> void:
 
 func enter():
 #	loading sprite and adding timer for random movement
-	enemy.get_node("Sprite2D")
-	enemy.timer = 5
+	entity.get_node("Sprite2D")
+	entity.timer = 5
 
 func update(delta: float) -> void:
 #	logic for determining random movements
 #0 = idle, 1 = walk right, -1 = walk left
 	
-	enemy.timer-=delta
-	if enemy.time<=0:
-		enemy.time = randf_range(1,2)
-		enemy.choice = randi_range(-1,1)
-	enemy.velocity.x = enemy.choice*enemy.s_speed
+	entity.timer-=delta
+	if entity.time<=0:
+		entity.time = randf_range(1,2)
+		entity.choice = randi_range(-1,1)
+	entity.velocity.x = entity.choice*entity.s_speed
 #	flipping based on movements
-	if enemy.velocity.x<0:
-		enemy.get_node("Sprite2D").flip_h = 1
-		enemy.raycast.target_position = Vector2(-92,0)
+	if entity.velocity.x<0:
+		entity.get_node("Sprite2D").flip_h = 1
+		entity.raycast.target_position = Vector2(-92,0)
 	else:
-		enemy.get_node("Sprite2D").flip_h = 0
-		enemy.raycast.target_position = Vector2(92,0)
-	enemy.time-=delta
+		entity.get_node("Sprite2D").flip_h = 0
+		entity.raycast.target_position = Vector2(92,0)
+	entity.time-=delta
 
-	if enemy.raycast.is_colliding():
-		var collider = enemy.raycast.get_collider()
+	if entity.raycast.is_colliding():
+		var collider = entity.raycast.get_collider()
 		#	checking raycast collisions with main player
 		if collider.is_in_group("Mainplayer"):
 			fsm.change_state("chase")
 #	timer to go from alerted (search) state to passive (patrol) state
-	if enemy.timer <= 0:
+	if entity.timer <= 0:
 		fsm.change_state("patrol")

@@ -7,28 +7,29 @@ func _ready() -> void:
 
 
 func enter():
-	enemy.get_node("Sprite2D")
+	entity.get_node("Sprite2D")
+	print()
 	
 func update( delta: float) -> void:
 	#	logic for determining random movements
 	#0 = idle, 1 = walk right, -1 = walk left
 	
-	if enemy.time<=0:
-		enemy.time = randf_range(1,2)
-		enemy.choice = randi_range(-1,1)
-	enemy.velocity.x = enemy.choice*enemy.p_speed
+	if entity.time<=0:
+		entity.time = randf_range(1,2)
+		entity.choice = randi_range(-1,1)
+	entity.velocity.x = entity.choice*entity.p_speed
 #	flipping
-	if enemy.velocity.x<0:
-		enemy.get_node("Sprite2D").flip_h = 1
-		enemy.raycast.target_position = Vector2(-92,0)
-		enemy.get_node("hurtbox").position.x = -abs(enemy.get_node("hurtbox").position.x)
+	if entity.velocity.x<0:
+		entity.get_node("Sprite2D").flip_h = 1
+		entity.raycast.target_position = Vector2(-92,0)
+		entity.get_node("hurtbox").position.x = -abs(entity.get_node("hurtbox").position.x)
 	else:
-		enemy.get_node("Sprite2D").flip_h = 0
-		enemy.raycast.target_position = Vector2(92,0)
-		enemy.get_node("hurtbox").position.x = abs(enemy.get_node("hurtbox").position.x)
-	enemy.time-=delta
-	if enemy.raycast.is_colliding():
-		var collider = enemy.raycast.get_collider()
+		entity.get_node("Sprite2D").flip_h = 0
+		entity.raycast.target_position = Vector2(92,0)
+		entity.get_node("hurtbox").position.x = abs(entity.get_node("hurtbox").position.x)
+	entity.time-=delta
+	if entity.raycast.is_colliding():
+		var collider = entity.raycast.get_collider()
 #		checking main player collision
 		if collider.is_in_group("Mainplayer"):
 			fsm.change_state("chase")

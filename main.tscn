@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmj2ysy4kv6e6"]
 
 [ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://b3y1uvn4dcm1s" path="res://entities/enemies/jungle/easyenemy/easyenemy.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b3y1uvn4dcm1s" path="res://entities/enemies/jungle/easyenemy/easyenemy.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://b5jeb55ado3ye" path="res://entities/player/player.tscn" id="3_h2yge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
@@ -21,8 +21,8 @@ position = Vector2(44, 40)
 position = Vector2(532, 437)
 shape = SubResource("RectangleShape2D_0xm2m")
 
-[node name="easyenemy" parent="." unique_id=1531459879 instance=ExtResource("2_0xm2m")]
-position = Vector2(656, 331)
-
 [node name="Player" parent="." unique_id=1225824840 instance=ExtResource("3_h2yge")]
 position = Vector2(368, 291)
+
+[node name="easyenemy" parent="." unique_id=1042908383 instance=ExtResource("3_1bvp3")]
+position = Vector2(639, 328)
