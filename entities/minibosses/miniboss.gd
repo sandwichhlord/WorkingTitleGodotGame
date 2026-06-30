@@ -12,17 +12,18 @@ class_name MiniBoss
 @export var base_damage : float = 10.0
 
 @export var target: Vector2 = Vector2.ZERO
-@export var is_light_on : bool = true
+@export var is_light_on : bool = false
 
 @onready var health_component = $HealthComponent
 @onready var fsm_node = $fsm
 @export var active_contact_hitbox: Hitbox
 
+@export var attack_range : float = 70.0 #from suction
 
 func _ready() -> void:
 	if health_component:
 		health_component.health_changed.connect(_on_health_changed)  #changes states
-		health_component.health_changed.connect(_on_boss_died)       
+		health_component.died.connect(_on_boss_died)       
 		
 	global_position = top
 	target = top                                                                                                      
@@ -30,9 +31,9 @@ func _ready() -> void:
 	fsm_node.change_state("move")
 	
 	var body_shape = CircleShape2D.new()
-	body_shape.radius = 30.0
+	body_shape.radius = attack_range*0.5
 	
-	active_contact_hitbox = Hitbox.new(15.0, 0.0, body_shape, 1)
+	active_contact_hitbox = Hitbox.new(base_damage, 0.0, body_shape, 3)
 	
 	add_child(active_contact_hitbox)
 	
@@ -41,7 +42,7 @@ func _ready() -> void:
 func _on_health_changed(current_health, max_health) -> void:
 	if is_invulnerable:
 		return
-	print("TRIPWIRE . HP is now: ",current_health)
+	print("HP is now: ",current_health)
 	if current_stage==1 and current_health <= (max_health*0.5):
 		current_stage=2
 		base_damage *= 1.5
@@ -52,15 +53,14 @@ func _on_health_changed(current_health, max_health) -> void:
 		
 	if current_stage==2 and current_health <= (max_health*0.3):
 		current_stage=3
-		base_damage*2
+		base_damage*=2
 		if active_contact_hitbox:
 			active_contact_hitbox.damage = base_damage*2
 		fsm_node.change_state("handler")
 		
 
-func _on_boss_died(current_health, max_health) -> void:
-	if current_health <= 0:
-		queue_free()
+func _on_boss_died() -> void:
+	queue_free()
 
 
 func lighting(light_is_on : bool) -> void:
@@ -68,10 +68,3 @@ func lighting(light_is_on : bool) -> void:
 	
 	if is_light_on:
 		fsm_node.change_state("stagger")
-	
-	else:
-		if current_stage >=2 :
-			fsm_node.change_state("suction")
-		else:
-			fsm_node.change_state("move")
-	
