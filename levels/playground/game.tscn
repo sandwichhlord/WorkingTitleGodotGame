@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://rxkopfwabnl5"]
+
+[ext_resource type="Script" uid="uid://bxcb48qxrb7qj" path="res://core/manager/game_manager.gd" id="1_nqswd"]
+
+[node name="game" type="Node2D" unique_id=529721828]
+
+[node name="GameManager" type="Node" parent="." unique_id=1254785849]
+unique_name_in_owner = true
+script = ExtResource("1_nqswd")
