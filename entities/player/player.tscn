@@ -1,6 +1,35 @@
 [gd_scene format=3 uid="uid://b5jeb55ado3ye"]
 
 [ext_resource type="Script" uid="uid://drrswf1drir4k" path="res://entities/player/player.gd" id="1_symyc"]
+[ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="2_abrql"]
+[ext_resource type="Script" uid="uid://fnsv3jys50gi" path="res://core/components/HurtboxComponent.gd" id="3_sglur"]
+[ext_resource type="Script" uid="uid://cnox8tqi4b5dj" path="res://core/components/HealthComponent.gd" id="4_bls4j"]
 
-[node name="Player" type="CharacterBody2D" unique_id=1225824840]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sglur"]
+size = Vector2(108, 115)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bls4j"]
+size = Vector2(121, 122)
+
+[node name="Player" type="CharacterBody2D" unique_id=1225824840 groups=["Mainplayer"]]
 script = ExtResource("1_symyc")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=580512906]
+script = ExtResource("4_bls4j")
+max_health = 30.0
+metadata/_custom_type_script = "uid://cnox8tqi4b5dj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1632971455]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_sglur")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1253476894]
+texture = ExtResource("2_abrql")
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=6894433]
+script = ExtResource("3_sglur")
+metadata/_custom_type_script = "uid://fnsv3jys50gi"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=262302754]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_bls4j")

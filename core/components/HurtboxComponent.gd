@@ -17,7 +17,7 @@ func _ready() -> void:
 
 # if owner has health component, damage it by damage amount
 func recieve_hit(damage: float) -> void:
-	#print("recieve_hit activated")
+	print("recieve_hit activated")
 	
 	if owner.has_node("HealthComponent"):
 		#print("health node found")

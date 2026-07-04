@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://cwflyjle2gvq6"]
+
+[ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="1_h5afn"]
+[ext_resource type="Script" uid="uid://dc5lpmktdq4m8" path="res://entities/enemies/jungle/projectile_enemy/projectile_enemy.gd" id="1_sk05k"]
+[ext_resource type="Script" uid="uid://cnox8tqi4b5dj" path="res://core/components/HealthComponent.gd" id="1_vcret"]
+[ext_resource type="Script" uid="uid://fnsv3jys50gi" path="res://core/components/HurtboxComponent.gd" id="2_sk05k"]
+[ext_resource type="Script" uid="uid://bu4ynbabltdlj" path="res://core/state_machine/fsm.gd" id="4_7lmgl"]
+[ext_resource type="Script" uid="uid://cvlr4yroa2amn" path="res://core/states/enemies/projectile_enemy/idle.gd" id="6_k8uwv"]
+[ext_resource type="Script" uid="uid://divaxy8ovooru" path="res://core/states/enemies/projectile_enemy/attack.gd" id="7_6b4sn"]
+[ext_resource type="Script" uid="uid://dx5ow3laeoism" path="res://core/states/enemies/hurt.gd" id="8_6b4sn"]
+[ext_resource type="Script" uid="uid://dwsxxt5xoe16w" path="res://entities/enemies/jungle/projectile_enemy/bullet.gd" id="9_qtmkb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmqtr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8uwv"]
+size = Vector2(120, 124)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ari1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5afn"]
+size = Vector2(84, 89)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ari1"]
+radius = 455.089
+
+[node name="projectile_enemy" type="CharacterBody2D" unique_id=1121752868 node_paths=PackedStringArray("detection")]
+position = Vector2(-1, 88)
+script = ExtResource("1_sk05k")
+detection = NodePath("Detection_Area")
+x_speed = 300
+shape = SubResource("RectangleShape2D_wmqtr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2011485554]
+position = Vector2(-2.5, -1)
+scale = Vector2(0.9609375, 0.984375)
+texture = ExtResource("1_h5afn")
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=989305395]
+script = ExtResource("2_sk05k")
+metadata/_custom_type_script = "uid://fnsv3jys50gi"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=1737024326]
+visible = false
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_k8uwv")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=195869977]
+script = ExtResource("1_vcret")
+metadata/_custom_type_script = "uid://cnox8tqi4b5dj"
+
+[node name="fsm" type="Node" parent="." unique_id=2027527306 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_7lmgl")
+initial_state = NodePath("idle")
+metadata/_custom_type_script = "uid://bu4ynbabltdlj"
+
+[node name="idle" type="Node" parent="fsm" unique_id=1052965173]
+script = ExtResource("6_k8uwv")
+
+[node name="attack" type="Node" parent="fsm" unique_id=513580929]
+script = ExtResource("7_6b4sn")
+shape = SubResource("RectangleShape2D_6ari1")
+
+[node name="Hurt" type="Node" parent="fsm" unique_id=1895130308]
+script = ExtResource("8_6b4sn")
+metadata/_custom_type_script = "uid://dx5ow3laeoism"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1181014196]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_h5afn")
+
+[node name="Detection_Area" type="Area2D" parent="." unique_id=984596907]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=1929706735]
+visible = false
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_6ari1")
+
+[node name="bullet" type="CharacterBody2D" parent="." unique_id=1666956491]
+visible = false
+position = Vector2(0, -90)
+script = ExtResource("9_qtmkb")
+
+[node name="Sprite2D" type="Sprite2D" parent="bullet" unique_id=1458288756]
+position = Vector2(-1.9073486e-06, 0)
+scale = Vector2(0.42578128, 0.42968753)
+texture = ExtResource("1_h5afn")
+
+[connection signal="body_entered" from="Detection_Area" to="fsm/idle" method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection_Area" to="fsm/attack" method="_on_detection_area_body_exited"]

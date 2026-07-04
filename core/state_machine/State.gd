@@ -4,7 +4,7 @@ extends Node
 # Explicit type definitions so your code autocomplete works perfectly
 
 var fsm: Node
-var entity : CharacterBody2D
+var entity : CharacterBody2D 
 
 # Virtual lifecycle methods to be overridden by child states
 func enter() -> void: pass
