@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b4y8uqqji6385"]
+
+[node name="Node" type="Node" unique_id=910608612]
+
+[node name="Label" type="Label" parent="." unique_id=1692577573]
+offset_right = 675.0
+offset_bottom = 270.0
+text = "This is the next scene"
+horizontal_alignment = 1
+vertical_alignment = 1

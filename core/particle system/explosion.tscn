@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d0j2fi0rftn87"]
+
+[ext_resource type="Script" uid="uid://w5inaasjc2ds" path="res://core/particle system/explosion.tscn.gd" id="1_d1tn0"]
+
+[sub_resource type="Curve" id="Curve_wv4b6"]
+_data = [Vector2(0.010638304, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.06741583), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="explosion" type="Node2D" unique_id=990538243]
+script = ExtResource("1_d1tn0")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1645804048]
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 188.62
+scale_amount_min = 4.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_wv4b6")
