@@ -19,18 +19,17 @@ func take_damage(amount: float) -> void:
 	
 	if current_health <= 0:
 		return # is already dead, ignore incoming damage
-		
+
 	current_health -= amount
 	current_health = clamp(current_health, 0.0, max_health)
-	
-	# emit signals so parent nodes and stuff know what happened
+
 	health_changed.emit(current_health, max_health)
 	damage_taken.emit(amount)
-	print("damage taken: ", amount, " health remaining: ", current_health)
+		#print("damage taken: ", amount, " health remaining: ", current_health)
 	
 	
 	if current_health <= 0:
-		print("died")
+		#print("died")
 		died.emit()
 
 func heal(amount: float) -> void:
