@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://btjjrrrivuo5m"]
+
+[ext_resource type="Script" uid="uid://drdd2lre37scd" path="res://core/components/state_object.gd" id="1_lf8q7"]
+[ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="2_u608l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u608l"]
+size = Vector2(130, 116)
+
+[node name="StateObject" type="Area2D" unique_id=966768255]
+script = ExtResource("1_lf8q7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1688902768]
+position = Vector2(76, 72)
+shape = SubResource("RectangleShape2D_u608l")
+
+[node name="BeforeState" type="Sprite2D" parent="." unique_id=1156980357]
+position = Vector2(75, 69)
+texture = ExtResource("2_u608l")
+
+[node name="AfterState" type="Sprite2D" parent="." unique_id=1608565446]
+modulate = Color(1, 0.12156863, 1, 1)
+position = Vector2(76, 70)
+texture = ExtResource("2_u608l")
