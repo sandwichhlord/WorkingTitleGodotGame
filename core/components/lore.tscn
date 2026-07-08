@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dseswvjlvtol0"]
+
+[ext_resource type="Script" uid="uid://c5spydn1185yx" path="res://core/components/lore.gd" id="1_ngqk3"]
+[ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="2_yoqm8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ngqk3"]
+size = Vector2(62.399994, 56.499992)
+
+[node name="Lore" type="Area2D" unique_id=1711270900]
+script = ExtResource("1_ngqk3")
+lore_text = "Hey | U da real warrior | I want u bad
+"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1818624828]
+position = Vector2(515, 265)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_ngqk3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1305100787]
+position = Vector2(520, 259)
+texture = ExtResource("2_yoqm8")
+
+[node name="InteractPrompt" type="Label" parent="." unique_id=1591984314]
+offset_left = 426.0
+offset_top = 150.0
+offset_right = 705.0
+offset_bottom = 188.0
+text = "Press Space to Interact"
