@@ -82,7 +82,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqrof"]
 size = Vector2(16, 18)
 
-[node name="Player" type="CharacterBody2D" unique_id=1225824840]
+[node name="Player" type="CharacterBody2D" unique_id=1225824840 groups=["Mainplayer"]]
 script = ExtResource("1_symyc")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2054789738]
