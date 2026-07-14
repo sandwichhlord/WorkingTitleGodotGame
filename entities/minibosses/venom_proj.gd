@@ -22,21 +22,19 @@ func _physics_process(delta: float) -> void:
 	global_position += direction * speed * delta
 
 func _on_body_entered(body: Node2D) -> void:
-	# 1. Ignore the boss that shot it!
+	# ignore the boss body
 	if body == creator:
 		return
-
-	# 2. Instantly turn off visuals
+	
 	visible = false
 
-	# 3. Safely turn off the physical collision of THIS bullet
+	# turn off this bullet
 	set_deferred("monitoring", false)
 
-	# 4. Safely turn off the child Hitbox so it doesn't deal extra damage
 	for child in get_children():
 		if child is Area2D:
 			child.set_deferred("monitoring", false)
 
-	# 5. Wait a split second (good for playing hit sounds later) and delete
+	# wait then delete
 	await get_tree().create_timer(0.1).timeout
 	queue_free()
