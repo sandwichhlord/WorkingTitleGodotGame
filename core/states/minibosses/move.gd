@@ -7,10 +7,7 @@ extends State
 @onready var boss: CharacterBody2D = get_parent().get_parent()
 
 func enter() -> void:
-	if not boss.is_light_on :
-		boss.target = boss.top
-		return
-		
+	
 	_pick_new_target()
 	
 func exit() -> void:
@@ -21,16 +18,16 @@ func update(delta: float) -> void:
 		return
 	
 	var current_speed = mod_speed()
-	# updates the global position of the boss
-	boss.global_position = boss.global_position.move_toward(
-		boss.target,
-		current_speed*delta
-	)
+	var distance = boss.global_position.distance_to(boss.target)
 	
-	if boss.global_position.distance_to(boss.target) < 5.0:
+	if distance < 5.0:
 		boss.global_position = boss.target
+		boss.velocity = Vector2.ZERO
 		_arrive_at_point()
-		
+	else:
+		var direction = boss.global_position.direction_to(boss.target)
+		boss.velocity = direction*current_speed
+		boss.move_and_slide()
 
 func _pick_new_target() -> void:
 	var points_pool = [boss.top, boss.left, boss.right]
@@ -44,11 +41,7 @@ func _pick_new_target() -> void:
 
 
 func _arrive_at_point() -> void:
-	if boss.global_position == boss.top and not boss.is_light_on:
-		fsm_node.change_state("stagger")
-		return
-		
-	_pick_new_target()
+	
 	decide_attack()
 
 
@@ -64,7 +57,5 @@ func mod_speed() -> float:
 func decide_attack() -> void:
 	if boss.current_stage == 1:
 		fsm_node.change_state("venom")
-	elif boss.current_stage == 2:
-		fsm_node.change_state("suction")
-	elif boss.current_stage == 3:
-		fsm_node.change_state("suction")
+	elif boss.current_stage >= 2:
+		fsm_node.change_state("handler")

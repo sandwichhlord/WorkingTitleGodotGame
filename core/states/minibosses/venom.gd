@@ -12,19 +12,11 @@ func enter() -> void:
 	attack_timer = 0.0
 	is_attacking = false
 	
-	await get_tree().create_timer(0.2).timeout
-	
-	_shoot()
-	
-	await get_tree().create_timer(0.2).timeout
-	
-	fsm_node.change_state("move")
-	
 func exit() -> void:
 	pass
 	
 func update(delta:float) -> void:
-	attack_timer+=delta 
+	attack_timer += delta
 	
 	#all this happens at 0.2 seconds
 	if attack_timer>=0.2 and not is_attacking:
@@ -32,7 +24,10 @@ func update(delta:float) -> void:
 		is_attacking = true
 	
 	elif attack_timer >=0.4:
-		fsm_node.change_state("move")
+		if boss.current_stage == 3:
+			fsm_node.change_state("handler")
+		else:
+			fsm_node.change_state("move")
 
 func _shoot() -> void:
 	if not pool:
@@ -56,4 +51,7 @@ func _shoot() -> void:
 	pool.spawn(boss.global_position,dir_left)
 	pool.spawn(boss.global_position,dir_center)
 	pool.spawn(boss.global_position,dir_right)
+	
+
+
 	
