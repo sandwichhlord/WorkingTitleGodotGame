@@ -15,7 +15,7 @@ func _ready() -> void:
 	current_health = max_health
 
 func take_damage(amount: float) -> void:
-	#print("take_damage funct of HealtComponent called")
+	print("take_damage funct of HealtComponent called")
 	
 	if current_health <= 0:
 		return # is already dead, ignore incoming damage
