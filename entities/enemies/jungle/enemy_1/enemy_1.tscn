@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://baib52kuw1bfa"]
+
+[ext_resource type="Texture2D" uid="uid://be26xtxjftcr7" path="res://icon.svg" id="1_x87aa"]
+[ext_resource type="Script" uid="uid://bu4ynbabltdlj" path="res://core/state_machine/fsm.gd" id="2_gmm1g"]
+[ext_resource type="Script" uid="uid://cs0hsekh1jrae" path="res://core/states/enemies/attack.gd" id="3_yu6e3"]
+[ext_resource type="Script" uid="uid://08vok5juetvm" path="res://core/states/enemies/chase.gd" id="4_vsir5"]
+[ext_resource type="Script" uid="uid://c4aytx7egpsts" path="res://core/states/enemies/patrol.gd" id="5_e4m36"]
+[ext_resource type="Script" uid="uid://cdte055fvwo18" path="res://core/states/enemies/search.gd" id="6_o4vcc"]
+[ext_resource type="Script" uid="uid://dx5ow3laeoism" path="res://core/states/enemies/hurt.gd" id="7_e4m36"]
+[ext_resource type="Script" uid="uid://fnsv3jys50gi" path="res://core/components/HurtboxComponent.gd" id="8_o4vcc"]
+[ext_resource type="Script" uid="uid://der0csg1kd65v" path="res://core/components/HitboxComponent.gd" id="9_o4vcc"]
+[ext_resource type="Script" uid="uid://cnox8tqi4b5dj" path="res://core/components/HealthComponent.gd" id="10_esh2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e4m36"]
+size = Vector2(57, 58.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esh2v"]
+size = Vector2(23, 40)
+
+[node name="enemy1" type="Node" unique_id=1531459879]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=579326909]
+position = Vector2(0.5, 0.5)
+scale = Vector2(0.513, 0.513)
+texture = ExtResource("1_x87aa")
+
+[node name="fsm" type="Node" parent="." unique_id=183777526]
+script = ExtResource("2_gmm1g")
+metadata/_custom_type_script = "uid://bu4ynbabltdlj"
+
+[node name="attack" type="Node" parent="fsm" unique_id=346584746]
+script = ExtResource("3_yu6e3")
+metadata/_custom_type_script = "uid://cs0hsekh1jrae"
+
+[node name="chase" type="Node" parent="fsm" unique_id=1863730052]
+script = ExtResource("4_vsir5")
+metadata/_custom_type_script = "uid://08vok5juetvm"
+
+[node name="patrol" type="Node" parent="fsm" unique_id=1276764437]
+script = ExtResource("5_e4m36")
+metadata/_custom_type_script = "uid://c4aytx7egpsts"
+
+[node name="search" type="Node" parent="fsm" unique_id=1633680045]
+script = ExtResource("6_o4vcc")
+metadata/_custom_type_script = "uid://cdte055fvwo18"
+
+[node name="Hurt" type="Node" parent="fsm" unique_id=1523629369]
+script = ExtResource("7_e4m36")
+metadata/_custom_type_script = "uid://dx5ow3laeoism"
+
+[node name="hurtbox" type="Area2D" parent="." unique_id=1490908728]
+script = ExtResource("8_o4vcc")
+metadata/_custom_type_script = "uid://fnsv3jys50gi"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox" unique_id=2116416812]
+position = Vector2(0.5, 0.75)
+shape = SubResource("RectangleShape2D_e4m36")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1998489935]
+script = ExtResource("9_o4vcc")
+metadata/_custom_type_script = "uid://der0csg1kd65v"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=167993550]
+position = Vector2(40.5, 3)
+shape = SubResource("RectangleShape2D_esh2v")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1485391057]
+script = ExtResource("10_esh2v")
+metadata/_custom_type_script = "uid://cnox8tqi4b5dj"
