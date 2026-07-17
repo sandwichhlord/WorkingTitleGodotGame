@@ -12,6 +12,6 @@ Basic Rules:-
 
 5) DONT TOUCH CORE CODE WITHOUT PROPER HEAVY DISCUSSION ABOUT IT IN A MEETING FIRST
 
-6) dont make changes in anyone elses code ofc
+6) dont make changes in anyone elses code obviously
 
 7) make sure everything is working great before committing 
